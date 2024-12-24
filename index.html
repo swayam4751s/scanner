@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Riddle</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f3f3f3;
+    }
+    .qr-code {
+      margin: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    .riddle {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Scan the QR Code</h1>
+  <div class="qr-code">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://yourwebsite.com/riddle" alt="QR Code">
+  </div>
+
+  <div class="riddle" id="riddle">
+    मैं चलता नहीं, फिर भी काम आता हूं, जीवन का आधार अपने भीतर छुपाता हूं। न झरना, न झील, पर मैं बहता हूं, गर्मी में सबसे पहले याद आता हूं। मैं कौन हूं, यह पहचाने? जो हर दफ्तर और घर में पाए।
+  </div>
+
+  <script>
+    // Check if the page is loaded due to QR scan
+    if (window.location.href.includes("riddle")) {
+      const riddleText = document.getElementById('riddle').innerText;
+
+      // Use Web Speech API to speak the riddle
+      const synth = window.speechSynthesis;
+      const utterance = new SpeechSynthesisUtterance(riddleText);
+      utterance.lang = 'hi-IN'; // Set language to Hindi
+      synth.speak(utterance);
+    }
+  </script>
+</body>
+</html>
